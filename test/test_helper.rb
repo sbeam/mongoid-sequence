@@ -1,20 +1,19 @@
 require "bundler/setup"
-require "test/unit"
+require "minitest"
+require "minitest/autorun"
 require "mongoid"
+require "mongoid/paranoia"
 
 require File.expand_path("../../lib/mongoid-sequence", __FILE__)
 
 Mongoid.configure do |config|
-  name = "mongoid_sequence_test"
-  config.master = Mongo::Connection.new.db(name)
+  config.connect_to "mongoid_sequence_test"
 end
 
 Dir["#{File.dirname(__FILE__)}/models/*.rb"].each { |f| require f }
 
-class BaseTest < Test::Unit::TestCase
-  def test_default; end # Avoid "No tests were specified." on 1.8.7
-
+class BaseTest < MiniTest::Test
   def teardown
-    Mongoid.master.collections.select {|c| c.name !~ /system/ }.each(&:remove)
+    Mongoid.default_session.collections.select {|c| c.name !~ /system/ }.each(&:drop)
   end
 end

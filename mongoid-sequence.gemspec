@@ -10,7 +10,9 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency("mongoid", "~> 4.0")
   gem.add_dependency("activesupport", "~> 4.0")
+  gem.add_development_dependency("minitest", "~> 5.10.1")
   gem.add_development_dependency("rake", "~> 10")
+  gem.add_development_dependency("mongoid-paranoia", "~> 2.0.0")
 
   gem.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   gem.files         = `git ls-files`.split("\n")

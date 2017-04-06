@@ -8,8 +8,9 @@ Gem::Specification.new do |gem|
   gem.summary       = %q{Specify fields to behave like a sequence number (exactly like the "id" column in conventional SQL flavors).}
   gem.homepage      = "https://github.com/goncalossilva/mongoid-sequence"
 
-  gem.add_dependency("mongoid", "~> 4.0")
+  gem.add_dependency("mongoid", "~> 5.0")
   gem.add_dependency("activesupport", "~> 4.0")
+  gem.add_development_dependency("pry", "~> 0")
   gem.add_development_dependency("minitest", "~> 5.10.1")
   gem.add_development_dependency("rake", "~> 10")
   gem.add_development_dependency("mongoid-paranoia", "~> 2.0.0")

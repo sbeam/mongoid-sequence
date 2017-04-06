@@ -14,6 +14,6 @@ Dir["#{File.dirname(__FILE__)}/models/*.rb"].each { |f| require f }
 
 class BaseTest < MiniTest::Test
   def teardown
-    Mongoid.default_session.collections.select {|c| c.name !~ /system/ }.each(&:drop)
+    Mongoid.default_client.collections.select {|c| c.name !~ /system/ }.each(&:drop)
   end
 end

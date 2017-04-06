@@ -23,10 +23,11 @@ module Mongoid
       sequences = database["__sequences"]
       self.class.sequence_fields.each do |field|
         sequence = sequences.find(_id: "#{self.class.name.underscore}_#{field}")
-        next_sequence = sequence.modify(
+        next_sequence = sequence.find_one_and_update(
           {"$inc" => {"seq" => 1}},
           new: true,
-          upsert: true
+          upsert: true,
+          return_document: :after
         )
 
         self[field] = next_sequence["seq"]

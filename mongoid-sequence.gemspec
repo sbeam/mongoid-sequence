@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
   gem.homepage      = "https://github.com/goncalossilva/mongoid-sequence"
 
   gem.add_dependency("mongoid", "~> 5.0")
-  gem.add_dependency("activesupport", "~> 4.0")
+  gem.add_dependency("activesupport", ">= 4.0")
   gem.add_development_dependency("pry", "~> 0")
   gem.add_development_dependency("minitest", "~> 5.10.1")
   gem.add_development_dependency("rake", "~> 10")

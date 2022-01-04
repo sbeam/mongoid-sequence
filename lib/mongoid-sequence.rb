@@ -12,9 +12,9 @@ module Mongoid
     module ClassMethods
       attr_accessor :sequence_fields
 
-      def sequence(field)
+      def sequence(field, options = {})
         self.sequence_fields ||= []
-        self.sequence_fields << field
+        self.sequence_fields << [field, options]
       end
     end
 
@@ -22,6 +22,7 @@ module Mongoid
       database = self.class.collection.database
       sequences = database["__sequences"]
       self.class.sequence_fields.each do |field|
+        offset = options[:offset]
         sequence = sequences.find(_id: "#{self.class.name.underscore}_#{field}")
         next_sequence = sequence.modify(
           {"$inc" => {"seq" => 1}},
@@ -29,7 +30,8 @@ module Mongoid
           upsert: true
         )
 
-        self[field] = next_sequence["seq"]
+        self[field] = next_sequence["value"]["seq"]
+        self[field] += offset - 1 if offset
       end if self.class.sequence_fields
     end
   end

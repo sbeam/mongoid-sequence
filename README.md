@@ -45,6 +45,13 @@ s2 = Sequenced.create
 s2.id #=> 2 # and so on
 ```
 
+It's possible to use the `offset` option.
+Thus the sequence below will be started from 1000 value.
+
+```ruby
+  sequence :my_sequence, :offset => 1000
+```
+
 ## Consistency
 
 Mongoid::Sequence uses the atomic [findAndModify](http://www.mongodb.org/display/DOCS/findAndModify+Command) command, so you shouldn't have to worry about the sequence's consistency.
